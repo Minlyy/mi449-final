@@ -80,7 +80,7 @@ function CatGrid() {
           <p>{catBreed.name}</p>
         </div>
       ))}
-      <button onClick={fetchCatImages} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded col-end-4 mb-6">New Breeds</button>
+      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded col-end-4 mb-6">New Breeds</button>
     </div>
     <h1 className='mb-5 mt-5'>Favorites</h1>
       <Favorite favorites={favorites} />
@@ -93,7 +93,7 @@ function Favorite({favorites}) {
   return (
     <div className='grid grid-cols-4 grid-rows-4 gap-4 ml-4 mr-4'>
       {favorites.map(cat => (
-        <img src={cat.url} className='w-full h-80 object-cover'></img>
+        <img src={cat.url} className='w-full h-80 object-cover' alt={cat.name}></img>
       ))}
     </div>
   );
