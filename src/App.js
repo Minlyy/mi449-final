@@ -41,7 +41,7 @@ function CatGrid() {
         const response2 = await fetch('https://api.thecatapi.com/v1/images/search?breed_id='+data[catIndex + i].id);
         const data2 = await response2.json();
         console.log(data2)
-        if(data2.length != 0)
+        if(data2.length !== 0)
         {
           data[catIndex + i]['url'] = data2[0].url;
           actualData.push(data[catIndex + i]);
