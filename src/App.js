@@ -69,23 +69,24 @@ function CatGrid() {
     console.log(catIndex);
   }
   
-  function AddFavorite(url, breed) {
+  function AddFavorite(url, breed, description) {
     let cat = {};
     cat['url'] = url;
     cat['breed'] = breed;
+    cat['des'] = description;
     setFavorites([...favorites, cat])
   }
 
   return (
     <div>
-    <div className="grid grid-cols-3 grid-rows-3 gap-4 w-1/2 mx-auto">
+    <div className="grid grid-cols-3 grid-rows-3 gap-4 w-1/2 mx-auto border-4 border-green-600 rounded-3xl">
       {catBreeds.map(catBreed => (
-        <div>
-          <img src={catBreed.url} alt={catBreed.name} className='w-full h-80 object-cover' onClick={() => AddFavorite(catBreed.url, catBreed.name)}/>
+        <div className='ml-5 mr-5 mt-2'>
+          <img src={catBreed.url} alt={catBreed.name} className='w-full h-80 object-cover border-4 border-red-600 rounded-3xl' onClick={() => AddFavorite(catBreed.url, catBreed.name, catBreed.description)}/>
           <p>{catBreed.name}</p>
         </div>
       ))}
-      <button onClick={AddIndex} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded col-end-4 mb-6">New Breeds</button>
+      <button onClick={AddIndex} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded col-end-4 mb-6 mr-5">New Breeds</button>
     </div>
     <h1 className='mb-5 mt-5'>Favorites</h1>
       <Favorite favorites={favorites} />
@@ -98,7 +99,10 @@ function Favorite({favorites}) {
   return (
     <div className='grid grid-cols-4 grid-rows-4 gap-4 ml-4 mr-4'>
       {favorites.map(cat => (
-        <img src={cat.url} className='w-full h-80 object-cover' alt={cat.name}></img>
+        <div>
+          <img src={cat.url} className='w-full h-80 object-cover' alt={cat.name}></img>
+          <p>{cat.des}</p>
+        </div>
       ))}
     </div>
   );
