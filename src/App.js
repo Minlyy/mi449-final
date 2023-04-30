@@ -32,37 +32,42 @@ function CatGrid() {
   const [catIndex, setIndex] = useState(0);
   const [favorites, setFavorites] = useState([]);
 
-  const fetchCatImages = async () => {
-    try {
-      const response = await fetch('https://api.thecatapi.com/v1/breeds');
-      const data = await response.json();
-      const actualData = [];
-      for(let i = 0; i < 9; i++) {
-        const response2 = await fetch('https://api.thecatapi.com/v1/images/search?breed_id='+data[catIndex + i].id);
-        const data2 = await response2.json();
-        console.log(data2)
-        if(data2.length !== 0)
-        {
-          data[catIndex + i]['url'] = data2[0].url;
-          actualData.push(data[catIndex + i]);
-        }
-        else
-        {
-          data[catIndex + i]['url'] = "";
-          actualData.push(data[catIndex + i]);
-        }
-      }
-      setCatBreeds(actualData);
-    } catch (error) {
-      console.log(error);
-    }
-    setIndex(catIndex + 9);
-  };
 
 
   useEffect(() => {
+    const fetchCatImages = async () => {
+      try {
+        const response = await fetch('https://api.thecatapi.com/v1/breeds');
+        const data = await response.json();
+        console.log(data)
+        const actualData = [];
+        for(let i = 0; i < 9; i++) {
+          const response2 = await fetch('https://api.thecatapi.com/v1/images/search?breed_id='+data[catIndex + i].id);
+          const data2 = await response2.json();
+          if(data2.length !== 0)
+          {
+            data[catIndex + i]['url'] = data2[0].url;
+            actualData.push(data[catIndex + i]);
+          }
+          else
+          {
+            data[catIndex + i]['url'] = "";
+            actualData.push(data[catIndex + i]);
+          }
+        }
+        setCatBreeds(actualData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     fetchCatImages();
-  }, []);
+  }, [catIndex]);
+
+  function AddIndex() {
+    setIndex(catIndex + 9);
+    console.log(catIndex);
+  }
   
   function AddFavorite(url, breed) {
     let cat = {};
@@ -80,7 +85,7 @@ function CatGrid() {
           <p>{catBreed.name}</p>
         </div>
       ))}
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded col-end-4 mb-6">New Breeds</button>
+      <button onClick={AddIndex} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded col-end-4 mb-6">New Breeds</button>
     </div>
     <h1 className='mb-5 mt-5'>Favorites</h1>
       <Favorite favorites={favorites} />
