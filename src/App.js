@@ -79,7 +79,7 @@ function CatGrid() {
 
   return (
     <div>
-    <div className="grid grid-cols-3 grid-rows-3 gap-4 w-1/2 mx-auto border-4 border-green-600 rounded-3xl">
+    <div className="grid grid-cols-3 grid-rows-3 gap-4 w-3/4 mx-auto border-4 border-green-600 rounded-3xl">
       {catBreeds.map(catBreed => (
         <div className='ml-5 mr-5 mt-2'>
           <img src={catBreed.url} alt={catBreed.name} className='w-full h-80 object-cover border-4 border-red-600 rounded-3xl' onClick={() => AddFavorite(catBreed.url, catBreed.name, catBreed.description)}/>
