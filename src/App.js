@@ -86,8 +86,8 @@ function CatGrid() {
           <p>{catBreed.name}</p>
         </div>
       ))}
-      <button onClick={AddIndex} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded col-end-4 mb-6 mr-5">New Breeds</button>
     </div>
+    <button onClick={AddIndex} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-5">New Breeds</button>
     <h1 className='mb-5 mt-5'>Favorites</h1>
       <Favorite favorites={favorites} />
     </div>
